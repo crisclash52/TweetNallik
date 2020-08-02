@@ -23,7 +23,7 @@ body {
   position: relative;
   padding: 20px;
   background-color: #fff;
-  width: 400px;
+  width: 800px;
   cursor: pointer;
   transition: border-color .1s;
 }
