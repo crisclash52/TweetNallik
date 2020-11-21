@@ -4,6 +4,7 @@
   <meta charset="UTF-8">
   <title>CodePen - Platform game engine</title>
   <link rel="stylesheet" href="css/game.css">
+  <link rel="stylesheet" href="css/dpad.css">
 
 </head>
 <body>
@@ -13,12 +14,18 @@
 <p>
   Use the left, right and up arrow keys to move.
 </p>
-<p class="info">
-  The map data is fully customisable and scriptable (all contained within the "map" variable). See the comments in the code for instructions.
-</p>
+<div class="set">
+  <nav class="o-pad">
+    <a class="up" id="arribak" onclick="arriba()"></a>
+    <a class="right" id="derechak" onmousedown="derecha()" onmouseup="derechastop()"></a>
+    <a class="down" id="abajok"onclick="abajo()"></a>
+    <a class="left" id="izquierdak" onmousedown="izquierda()" onmouseup="izquierdastop()"></a>  
+  </nav>
+</div>
 <br>
 <a target="_blank" href="https://github.com/dissimulate/Clarity">View on GitHub</a>
 <!-- partial -->
+<script type="text/javascript" src="https://code.jquery.com/jquery-3.5.1.min.js" ></script>
   <script  src="js/game.js"></script>
 
 </body>

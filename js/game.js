@@ -21,7 +21,7 @@ THE SOFTWARE.
 */
 
 /* Customisable map data */
-
+var mariojump = new Audio('mp3/mariojump.mp3');
 var map = {
 
     tile_size: 16,
@@ -61,13 +61,13 @@ var map = {
     data: [
         [2, 2, 2, 2, 2, 2, 2, 2, 2, 2, 2, 2, 2],
         [2, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 2],
-        [2, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 2],
-        [2, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 2],
-        [2, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 2],
-        [2, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 2],
-        [2, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 2],
-        [2, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 2],
-        [2, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 2],
+        [2, 11, 11, 11, 11, 11, 1, 1, 1, 1, 1, 1, 2],
+        [2, 11, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 2],
+        [2, 11, 1, 1, 6, 6, 6, 6, 1, 4, 4, 4, 2],
+        [2, 11, 1, 1, 6, 1, 1, 1, 1, 1, 4, 1, 2],
+        [2, 11, 1, 1, 6, 6, 6, 6, 1, 1, 4, 1, 2],
+        [2, 11, 11, 11, 11, 11, 1, 6, 1, 1, 4, 1, 2],
+        [2, 1, 1, 1, 6, 6, 6, 6, 1, 4, 4, 1, 2],
         [2, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 2, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 2, 6, 6, 6, 6, 6, 2],
         [2, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 2, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 2, 1, 1, 1, 1, 1, 2],
         [2, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 2, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 2, 1, 1, 1, 1, 1, 2],
@@ -149,7 +149,7 @@ var map = {
     player: {
         x: 2,
         y: 2,
-        colour: '#FF9900'
+        colour: '#5D09B0'
     },
     
     /* scripts refered to by the "script" variable in the tile keys */
@@ -559,22 +559,24 @@ Clarity.prototype.move_player = function () {
 
 Clarity.prototype.update_player = function () {
 
-    if (this.key.left) {
+    if (this.key.left||$('#izquiedak').data('mousedown')) {
 
         if (this.player.vel.x > -this.current_map.vel_limit.x)
             this.player.vel.x -= this.current_map.movement_speed.left;
     }
 
-    if (this.key.up) {
-
+    if (this.key.up||$('#arribak').data('clicked')) {
+        mariojump.pause();
+        mariojump.play();
         if (this.player.can_jump && this.player.vel.y > -this.current_map.vel_limit.y) {
             
             this.player.vel.y -= this.current_map.movement_speed.jump;
             this.player.can_jump = false;
         }
+        $("#arribak").data('clicked', false);
     }
 
-    if (this.key.right) {
+    if (this.key.right||$('#derechak').data('mousedown')) {
 
         if (this.player.vel.x < this.current_map.vel_limit.x)
             this.player.vel.x += this.current_map.movement_speed.left;
@@ -648,3 +650,18 @@ var Loop = function() {
 };
 
 Loop();
+function arriba(){
+    $("#arribak").data('clicked', true);
+}
+function izquierda(){
+    $("#izquierdak").data('mousedown', true);
+}
+function derecha(){
+    $("#derechak").data('mousedown', true);
+}
+function derechastop(){
+    $("#derechak").data('mousedown', false);
+}
+function izquierdastop(){
+    $("#izquierdak").data('mousedown', false);
+}
