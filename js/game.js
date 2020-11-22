@@ -559,7 +559,7 @@ Clarity.prototype.move_player = function () {
 
 Clarity.prototype.update_player = function () {
 
-    if (this.key.left||$('#izquiedak').data('mousedown')) {
+    if (this.key.left||$('#izquierdak').data('mousedown')) {
 
         if (this.player.vel.x > -this.current_map.vel_limit.x)
             this.player.vel.x -= this.current_map.movement_speed.left;
@@ -665,3 +665,9 @@ function derechastop(){
 function izquierdastop(){
     $("#izquierdak").data('mousedown', false);
 }
+
+// var el = document.getElementById("derechak");
+//   el.addEventListener("touchstart", handleStart, false);
+//   el.addEventListener("touchend", handleEnd, false);
+//   el.addEventListener("touchcancel", handleCancel, false);
+//   el.addEventListener("touchmove", handleMove, false)
